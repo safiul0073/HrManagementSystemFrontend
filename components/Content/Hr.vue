@@ -21,8 +21,8 @@
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr v-for="d, index in data" :key="index">
+                    <tbody v-if="data">
+                        <tr  v-for="d, index in data" :key="index">
                             <td  class="text-center">{{d.name}}</td>
                             <td  class="text-center">{{d.pesent=== 0 ? "No" : "Yes"}}</td>
                             <td  class="text-center">{{d.totalPresent}}</td>
@@ -65,7 +65,7 @@ export default {
         }
     },async mounted () { 
         await this.$axios.get("/api/employee-attend").then((response) => {
-            this.data =  response.data.employees
+            this.data =  response? response.data.employees : null
             
         })
         await this.$axios.get("/api/getAllTotal").then((response) => {

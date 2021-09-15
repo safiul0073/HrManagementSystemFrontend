@@ -25,7 +25,7 @@
             </div>
         </div>
 
-    <div class="flex flex-wrap">
+    <div v-if="mAtt" class="flex flex-wrap">
         <div class="rounded-full bg-green-800 text-white w-1/4 text-center py-1 mr-.5 mb-.5" v-for="m, id in mAtt" :key="id" >{{m.month}} : {{m.count}}</div>
     </div>
   </div>
@@ -67,7 +67,8 @@ props: ["userAtt", "attMonth"],
             }else{
             this.$axios.post('/api/employee/',{
                 "method": "PUT", 
-                "id": this.id,
+                "id": this.userAtt.id,
+                "user_id": this.userAtt.user_id,
                 "present": this.present,
                 "holyday": this.holyday,
                 "weekend": this.weekend
